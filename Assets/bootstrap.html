@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <title>Form with Bootstrap Validation</title>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Registration Form</h1>
+        <div class="row">
+            <div class=" col-md-6 ">
+                <form id="myForm" class="needs-validation" onsubmit="validate()" novalidate>
+
+                    <!-- Name -->
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="name" required>
+                    <div class="invalid-feedback">
+                        Please provide a name.
+                    </div>
+
+                    <br>
+                    <!-- Email -->
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" required>
+                    <div class="invalid-feedback">
+                        Please provide a valid email address.
+                    </div>
+
+                    <br>
+                    <!-- Password -->
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" required>
+                    <div class="invalid-feedback">
+                        Please provide a password.
+                    </div>
+                    <br>
+
+                    <!-- Confirm Password -->
+                    <label for="confirmPassword" class="form-label">Confirm Password</label>
+                    <input type="password" class="form-control" id="confirmPassword" required>
+                    <div class="invalid-feedback">
+                        Please confirm your password.
+                    </div>
+                    <br>
+
+                    <!-- Date Of Birth -->
+                    <label for="date" class="form-label">Date of Birth</label>
+                    <input type="date" onchange="display_age()" class="form-control" id="date" required>
+                    <h6 id="ageMessage" class="form-text text-danger"></h6>
+                    <div class="invalid-feedback">
+                        Please enter the Date of Birth
+                    </div>
+
+
+
+                    <br>
+
+                    <!--  Years Of Experience  -->
+                    <label for="date" class="form-label">Select the date when you started working in IT Industry</label>
+                    <input type="date" class="form-control" id="startDate" required>
+                    <div class="invalid-feedback">
+                        Please enter the Date
+                    </div>
+                    <br>
+
+
+                    <!-- Radio Button -->
+                    <label for="Gender" class="form-label">Gender</label>
+                    <div class="form-check">
+                        <input type="radio" class="form-check-input" id="validationFormCheck2" name="radio-stacked"
+                            required value="Male">
+                        <label class="form-check-label" for="validationFormCheck2">Male</label>
+                    </div>
+                    <div class="form-check mb-3">
+                        <input type="radio" class="form-check-input" id="validationFormCheck3" name="radio-stacked"
+                            required value="Female">
+                        <label class="form-check-label" for="validationFormCheck3">Female</label>
+                    </div>
+
+
+                    <!-- Select Country -->
+                    <label for="country" class="form-label">Country</label>
+                    <select class="form-select" id="country" required>
+                        <option value="">Select a country</option>
+                        <option value="usa">USA</option>
+                        <option value="canada">Canada</option>
+                        <option value="uk">UK</option>
+                    </select>
+                    <div class="invalid-feedback">
+                        Please select a country.
+                    </div>
+                    <br>
+
+
+                    <!-- Upload Photo -->
+                    <label for="Upload Document" class="form-label">Upload Photo</label>
+                    <input type="file" class="form-control" name="file" id="file" accept="image/*"
+                        onchange="previewImage();" required>
+                    <img width="150px" id="preview">
+                    <div class="invalid-feedback">
+                        Please Upload the Photo
+                    </div>
+
+                    <!-- To Check-Box The Skills -->
+                    <div class="mb-3">
+                        <label for="Skills" id="Skill1" class="form-label">Skills</label>
+                        <div>
+                            <label class="form-check-label">
+                                <input type="checkbox" class="form-check-input" name="skills[]" value="HTML">
+                                HTML
+                            </label>
+                        </div>
+                        <div>
+                            <label class="form-check-label">
+                                <input type="checkbox" class="form-check-input" name="skills[]" value="CSS">
+                                CSS
+                            </label>
+                        </div>
+                        <div>
+                            <label class="form-check-label">
+                                <input type="checkbox" class="form-check-input" name="skills[]" value="JavaScript">
+                                JavaScript
+                            </label>
+                        </div>
+                        <div>
+                            <label class="form-check-label">
+                                <input type="checkbox" class="form-check-input" value="Others" id="othersCheckbox">
+                                Others
+                            </label>
+                            <!-- Others Input Box for Skills -->
+                            <input type="text" class="form-control mt-2" id="otherSkillsInput" name=""
+                                placeholder="Enter other skills" disabled>
+                        </div>
+                    </div>
+                    <!-- Terms and Conditions -->
+                    <br>
+                    <label for="checkbox" class="form-check-label">
+                        <input type="checkbox" class="form-check-input" id="checkbox" required>
+                        I agree to the terms and conditions.
+                    </label>
+                    <div class="invalid-feedback">
+                        You must agree to the terms and conditions.
+                    </div>
+                    <h4 id="error" style="color: red;"></h4>
+
+
+                    <!-- Submit Button -->
+
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+
+
+        <!-- Bootstrap CDN  -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
+        <!-- Javascript -->
+
+
+        <script>
+            // JavaScript to enable Bootstrap form validation
+            (function () {
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.querySelectorAll('.needs-validation');
+
+                // Loop over them and prevent submission
+                Array.prototype.slice.call(forms).forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            })();
+        </script>
+
+
+        <script>
+            // Function to validate
+
+            function validate() {
+                // to get the values of the input elements
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+                const confirmPassword = document.getElementById('confirmPassword').value;
+                const date = document.getElementById('date').value;
+                const startDateInput = document.getElementById('startDate').value;
+                const gender = document.querySelector('input[name="radio-stacked"]:checked').value;
+                const country = document.getElementById('country').value;
+                const skills = document.querySelectorAll('input[name="skills[]"]:checked');
+                const otherSkillsInput = document.getElementById('otherSkillsInput').value;
+                const selectedSkills = Array.from(skills).map(skill => skill.value);
+
+
+
+
+                // Age Calculation
+                const birthdate = new Date(date);
+                const today = new Date();
+                const age = today.getFullYear() - birthdate.getFullYear();
+
+
+                // Experience Calculation
+                const startDate = new Date(startDateInput);
+                const today1 = new Date();
+                const yearsDiff = today1.getFullYear() - startDate.getFullYear();
+                const monthsDiff = today1.getMonth() - startDate.getMonth();
+                let totalMonths = yearsDiff * 12 + monthsDiff;
+                if (today1.getDate() < startDate.getDate()) {
+                    totalMonths--;
+                }
+                const years = Math.floor(totalMonths / 12);
+                const months = totalMonths % 12;
+
+
+
+
+                // To Dispaly the Details
+                document.write(
+                    "Name: ", name + '<br><br><br>' +
+                "Email: ", email + '<br><br><br>' +
+                "Password: ", password + '<br><br><br>' +
+                "Confirm Password: ", confirmPassword + '<br><br><br>' +
+                "date: ", date + '<br><br><br>' +
+                "Gender:", gender + '<br><br><br>' +
+                "Country: ", country + '<br><br><br>' +
+                "Skills: ", selectedSkills + '<br><br><br>' +
+                "Other Skills: ", otherSkillsInput + '<br><br><br>' +
+                'Your age is: ', age + '<br><br><br>' +
+                'Years of experience: ', years + '&nbsp&nbsp&nbsp' +
+                'Months of experience: ', months);
+            }
+            function display_age() {
+                var date = document.getElementById('date').value;
+                var birthdate = new Date(date);
+                var today = new Date();
+                var age = today.getFullYear() - birthdate.getFullYear();
+                document.getElementById('ageMessage').innerHTML = "Your Age is : " + age;
+            }
+
+            // To make active the Checkbox
+
+            const othersCheckbox = document.getElementById('othersCheckbox');
+            const otherSkillsInput = document.getElementById('otherSkillsInput');
+
+            othersCheckbox.addEventListener('change', function () {
+                if (this.checked) {
+                    otherSkillsInput.disabled = false;
+                } else {
+                    otherSkillsInput.disabled = true;
+                    otherSkillsInput.value = '';
+                }
+            });
+
+            // To Preview The Image 
+
+            function previewImage() {
+                var file = document.getElementById("file").files
+                if (file.length > 0) {
+                    var fileReader = new FileReader()
+
+                    fileReader.onload = function (event) {
+                        document.getElementById("preview").setAttribute("src", event.target.result)
+                    }
+
+                    fileReader.readAsDataURL(file[0])
+                }
+            }
+
+        </script>
+
+
+</body>
+
+</html>
