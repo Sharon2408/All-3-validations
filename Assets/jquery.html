@@ -4,138 +4,492 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <!-- Css -->
+
   <link rel="stylesheet" href="/Assets/css/style.css">
+
+  <title>Jquery Validation</title>
+
+  <!-- Jquery Validation CDN -->
+
   <script src="https://cdn.jsdelivr.net/jquery/1.12.4/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script> <title>Nice Form with Bootstrap Validation</title>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+
+  <style>
+    .error {
+      color: red;
+    }
+  </style>
+
 
 </head>
 
 <body>
-  <div class="container">
-    <h1>Registration Form</h1>
-    <div class="row">
-      <div class=" col-md-6 ">
-        <form id="RegForm" class="needs-validation" onsubmit="validate()" >
-          <label for="name" class="form-label">Name</label>
-          <input type="text" class="form-control" name="name"  id="name" >
-          <label for="email" class="form-label">Email</label>
-          <input type="email" class="form-control" id="email" >
-          <label for="password" class="form-label">Password</label>
-          <input type="password" class="form-control" id="password" >
-          <label for="confirmPassword" class="form-label">Confirm Password</label>
-          <input type="password" class="form-control" id="confirmPassword" >
-          <label for="Date" class="form-label">Date</label>
-          <input type="date" class="form-control" id="date" >
-          <br>
-          <div class="form-check">
-            <input type="radio" class="form-check-input" id="validationFormCheck2" name="radio-stacked" 
-              value="Male">
-            <label class="form-check-label" for="validationFormCheck2">Male</label>
-          </div>
-          <div class="form-check mb-3">
-            <input type="radio" class="form-check-input" id="validationFormCheck3" name="radio-stacked" 
-              value="Female">
-            <label class="form-check-label" for="validationFormCheck3">Female</label>
-          </div>
-          <div class="mb-3">
-            <label for="country" class="form-label">Country</label>
-            <select class="form-select" id="country" required>
-              <option value="">Select a country</option>
-              <option value="usa">USA</option>
-              <option value="canada">Canada</option>
-              <option value="uk">UK</option>
-            </select>
-            <br>
-            <label for="Upload Document" class="form-label">Upload Document</label>
-            <input type="file" class="form-control" id="file" required>
-            <br>
-            <label for="checkbox" class="form-check-label">
-              <input type="checkbox" class="form-check-input" id="checkbox" required>
-              I agree to the terms and conditions.
-            </label>
-            
-          </div>
 
-          <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
-      </div>
-    </div>
-    <script>
-      $(document).ready(function () {
-        $('#RegForm').validate({
-          rules: {
-            name: {
-              required: true,
-              minlength: 2,
-              maxlength: 25,
-              pattern: /^[a-zA-Z]+$/
-            },
-            email: {
-              required: true,
-              email: true
-            },
-            password: {
-              required: true,
-              minlength: 8
-            },
-            confirmPassword: {
-              required: true,
-              equalTo: '#password'
-            },
-            date: {
-              required: true
-            },
-            country: {
-              required: true
-            },
-            file: {
-              required: true
-            },
-            checkbox: {
-              required: true
-            }
+
+  <div id="form">
+
+    <fieldset style="display: center;">
+
+      <legend>Registration Form</legend>
+
+      <form id="myform">
+
+        <!-- Name -->
+        <label for="Name">Name</label>
+        <input type="text" id="name" name="name" placeholder="Name">
+        <br>
+        <br><br>
+
+        <!-- Email -->
+        <label for="Email">Email</label>
+        <input type="text" name="email" id="email" placeholder="Email">
+        <br>
+        <br><br>
+
+        <!-- Password -->
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" placeholder="********">
+        <br>
+        <br><br>
+
+        <!-- Confirm Password -->
+        <label for="confirmPassword">Confirm Password</label>
+        <input type="password" name="confirmpassword" id="confirmpassword" placeholder="********">
+        <br>
+        <br><br>
+
+        <!-- Contact No -->
+        <label for="Contact No">Contact No</label>
+        <input type="text" name="contact" id="contact" placeholder="+91">
+        <br>
+        <br><br>
+
+        <!-- DOB -->
+        <label for="DOB">DOB</label>
+        <input type="text" id="date" name="dob" onchange="display_age()" placeholder="dd/mm/yyyy">
+        <br>
+        <label id="ageMessage"></label>
+        <br><br>
+
+        <!-- Gender -->
+
+        <!-- Male -->
+        <label for="Gender" class="form-label">Gender</label><br>
+        <input type="radio" id="male" name="gender" required value="Male">
+        <label for="Male">Male</label>
+        <br>
+        <!-- female -->
+        <input type="radio" id="female" name="gender" required value="Female">
+        <label for="female">Female</label>
+        <label for="gender" name="gender"></label>
+        <br><br>
+
+
+
+        <!--  Years Of Experience  -->
+        <label for="date">Select the date when you started working in IT Industry</label>
+        <br><br>
+        <input type="date" name="experience" id="startDate" required>
+        <br>
+        <br>
+
+        <!-- Select Country -->
+        <label for="country">Country</label>
+        <select name="country" id="country" required>
+          <option value="">Select a country</option>
+          <option value="usa">USA</option>
+          <option value="canada">Canada</option>
+          <option value="uk">UK</option>
+        </select>
+        <br>
+        <br><br><br>
+
+
+        <!-- Upload Photo -->
+        <label for="Upload Document">Upload Photo</label>
+        <input name="photo" type="file" name="file" id="file" accept="image/*" onchange="previewImage();" required>
+        <br>
+        <img width="150px" id="preview">
+        <br>
+        <br><br><br>
+
+
+        <!-- Skills -->
+        <label for="Skills" id="Skill1">Skills</label>
+        <br>
+
+        <label>
+          <input type="checkbox" name="skills[]" value="HTML">
+          HTML
+        </label>
+        <br>
+
+        <label>
+          <input type="checkbox" name="skills[]" value="CSS">
+          CSS
+        </label>
+        <br>
+
+        <label>
+          <input type="checkbox" name="skills[]" value="JavaScript">
+          JavaScript
+        </label>
+        <br>
+
+        <label>
+          <input type="checkbox" value="Others" id="othersCheckbox">
+          Others
+        </label>
+
+        <!-- Others Input Box for Skills -->
+        <input type="text" id="otherSkillsInput" name="" placeholder="Enter other skills" disabled>
+        <br>
+        <br><br>
+
+
+
+        <!-- Submit Button -->
+        <button type="submit">Submit</button>
+        <div id="timeTaken"></div>
+      </form>
+
+    </fieldset>
+  </div>
+
+
+
+  <!-- Jquery Validation Script -->
+  <script>
+
+    $(document).ready(function () {
+      var startTime = new Date();
+      $('#myform').validate({
+
+        rules: {
+
+          // Name
+          name: {
+            required: true,
+            minlength: 2,
+            maxlength: 25,
+            pattern: /^[a-zA-Z\s]+$/
           },
-          messages: {
-            name: {
-              required: 'Please provide a name.',
-              minlength: 'Name must be at least 2 characters long.',
-              maxlength: 'Name must not exceed 50 characters.',
-              pattern: 'Name can only contain alphabetic characters and spaces.'
-            },
-            email: {
-              required: 'Please provide an email address.',
-              email: 'Please enter a valid email address.'
-            },
-            password: {
-              required: 'Please provide a password.',
-              minlength: 'Password must be at least 8 characters long.'
-            },
-            confirmPassword: {
-              required: 'Please confirm your password.',
-              equalTo: 'Passwords do not match.'
-            },
-            date: {
-              required: 'Please enter a date.'
-            },
-            country: {
-              required: 'Please select a country.'
-            },
-            file: {
-              required: 'Please upload a document.'
-            },
-            checkbox: {
-              required: 'You must agree to the terms and conditions.'
-            }
+
+          // Email
+          email: {
+            required: true,
+            minlength: 2,
+            maxlength: 25,
+            pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/
           },
-          errorPlacement: function (error, element) {
-            // Custom error placement to display error messages
-            error.appendTo($('#error'));
-          }
-        });
+
+          // Password
+          password: {
+            required: true,
+            minlength: 8,
+            pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_\-+=<>?])[A-Za-z\d!@#$%^&*()_\-+=<>?]{8,}$/
+          },
+
+          // Confirm Password
+          confirmpassword: {
+            required: true,
+            equalTo: '#password'
+          },
+
+          // Contact
+          contact: {
+            required: true
+          },
+
+          // DOB
+          dob: {
+            required: true
+          },
+
+          // Gender
+          gender: {
+            required: true
+          },
+
+          // Experience
+          experience: {
+            required: true
+          },
+
+          // Country
+          country: {
+            required: true
+          },
+
+          // Photo
+          photo: {
+            required: true
+          },
+
+          // Skills
+          skills: {
+            required: true
+          },
+        },
+
+
+        messages: {
+
+          // Name
+          name: {
+            required: '<br>Please provide a name.',
+            minlength: '<br>Name must be at least 2 characters long.',
+            maxlength: '<br>Name must not exceed 50 characters.',
+            pattern: '<br>Name can only contain alphabetic characters and spaces.'
+          },
+
+          // Email
+          email: {
+            required: '<br>Please provide an email address.',
+            minlength: '<br>Email must be at least 6 characters long.',
+            maxlength: '<br>Email must not exceed 50 characters.',
+            pattern: '<br>Please enter a valid email address.'
+          },
+
+          // Password
+          password: {
+            required: '<br>Please provide a password.',
+            minlength: '<br>Password must be at least 8 characters long.',
+            pattern: '<br>Password should have atleast 1 Uppercase and lowercase and special symbol and number'
+          },
+
+          // Confirm Password
+          confirmPassword: {
+            required: '<br>Please confirm your password.',
+            equalTo: '<br>Passwords do not match.'
+          },
+
+          // Contact
+          contact: {
+            required: '<br>Please give your contact info'
+          },
+
+          // DOB
+          dob: {
+            required: '<br>Please enter a date.'
+          },
+
+          // Gender
+          gender: {
+            required: '<br>Please select your Gender'
+          },
+
+          // Experience
+          experience: {
+            required: '<br>Please add the Experience date'
+          },
+
+          // Country
+          country: {
+            required: '<br>Please select a country.'
+          },
+
+          // Photo
+          photo: {
+            required: '<br>Please Upload a Photo'
+          },
+
+          // Skills
+          skills: {
+            required: '<br>You must agree to the terms and conditions.'
+          },
+        },
+
+        submitHandler: function (form) {
+          display_details();
+        }
+
       });
-    </script>
+
+    });
+
+
+
+    // <!-- To Print The Details -->
+
+    function display_details() {
+      var name = document.getElementById('name').value;
+
+      var email = document.getElementById('email').value;
+
+      var password = document.getElementById('password').value;
+
+      var confirmPassword = document.getElementById('confirmpassword').value;
+
+      var date = document.getElementById('date').value;
+
+      var contact = document.getElementById('contact').value;
+
+      var gender = document.querySelector('input[name="gender"]:checked');
+
+      var startDateInput = document.getElementById('startDate').value;
+
+      var country = document.getElementById('country').value;
+
+      var skills = document.querySelectorAll('input[name="skills[]"]:checked');
+
+      var otherSkillsInput = document.getElementById('otherSkillsInput').value;
+
+      var selectedSkills = Array.from(skills).map(skill => skill.value);
+
+      // Experience Calculation
+
+      const startDate = new Date(startDateInput);
+      const today1 = new Date();
+      const yearsDiff = today1.getFullYear() - startDate.getFullYear();
+      const monthsDiff = today1.getMonth() - startDate.getMonth();
+      let totalMonths = yearsDiff * 12 + monthsDiff;
+
+      if (today1.getDate() < startDate.getDate()) {
+        totalMonths--;
+      }
+
+      const years = Math.floor(totalMonths / 12);
+      const months = totalMonths % 12;
+
+      
+
+      // To display Age after submit
+
+      var date = document.getElementById('date').value;
+      var birthdate = new Date(date);
+      var today = new Date();
+      age = today.getFullYear() - birthdate.getFullYear();
+      document.getElementById('ageMessage').innerHTML = "Your Age is : " + age;
+
+// function time_disp(){
+//   $('#myform').submit(function (event) {
+//         event.preventDefault(); // Prevent the form from submitting
+
+//         var endTime = new Date(); // Get the current time when the submit button is clicked
+//         var elapsedMilliseconds = endTime - startTime;
+//         var elapsedSeconds = Math.floor(elapsedMilliseconds / 1000);
+//         var elapsedMinutes = Math.floor(elapsedSeconds / 60);
+//         var elapsedHours = Math.floor(elapsedMinutes / 60);
+
+//         timeTaken = elapsedHours + "hours " + (elapsedMinutes % 60) + "minutes " + (elapsedSeconds % 60) + "seconds";
+
+//         // document.write();
+
+//         // $('#timeTaken').text("Time taken: " + timeTaken);
+
+//         // Now you can submit the form
+//         this.submit();
+//       });
+// }
+// time_disp(timeTaken)
+
+      // To Display the Details
+      document.write(
+
+        "DETAILS:" + '<br><br><br>' +
+
+        "Name: ", name + '<br><br><br>' +
+
+      "Email: ", email + '<br><br><br>' +
+
+      "Password: ", password + '<br><br><br>' +
+
+      "Confirm Password: ", confirmPassword + '<br><br><br>' +
+
+      "Date Of Birth: ", date + '<br><br><br>' +
+
+      "Age: ", age + '<br><br><br>' +
+
+      "Contact No: ", contact + '<br><br><br>' +
+
+      "Country: ", country + '<br><br><br>' +
+
+      "Skills: ", selectedSkills + '<br><br><br>' +
+
+      "Other Skills: ", otherSkillsInput + '<br><br><br>' +
+
+      years+ 'Years' + '&nbsp&nbsp&nbsp' +
+
+      'and' + '&nbsp&nbsp' + months + '&nbsp&nbsp' + 'Months of experience'+
+      '<br><br>'+
+
+      "Time Taken: ",timeTaken
+      );
+
+    }
+
+document.writeln()
+    // To make active the textbox when the others checkbox is clicked
+
+    const othersCheckbox = document.getElementById('othersCheckbox');
+    const otherSkillsInput = document.getElementById('otherSkillsInput');
+
+    othersCheckbox.addEventListener('change', function () {
+      if (this.checked) {
+        otherSkillsInput.disabled = false;
+      } else {
+        otherSkillsInput.disabled = true;
+        otherSkillsInput.value = '';
+      }
+    });
+
+    // To Display Age
+
+    function display_age() {
+      var date = document.getElementById('date').value;
+      var birthdate = new Date(date);
+      var today = new Date();
+      age = today.getFullYear() - birthdate.getFullYear();
+      document.getElementById('ageMessage').innerHTML = "Your Age is : " + age;
+    }
+
+    // Image Preview
+    function previewImage() {
+      var file = document.getElementById("file").files
+      if (file.length > 0) {
+        var fileReader = new FileReader()
+
+        fileReader.onload = function (event) {
+          document.getElementById("preview").setAttribute("src", event.target.result)
+        }
+
+        fileReader.readAsDataURL(file[0])
+      }
+    }
+
+  </script>
+  <script>
+    $(document).ready(function () {
+
+
+      $('#myform').submit(function (event) {
+        event.preventDefault(); // Prevent the form from submitting
+
+        var endTime = new Date(); // Get the current time when the submit button is clicked
+        var elapsedMilliseconds = endTime - startTime;
+        var elapsedSeconds = Math.floor(elapsedMilliseconds / 1000);
+        var elapsedMinutes = Math.floor(elapsedSeconds / 60);
+        var elapsedHours = Math.floor(elapsedMinutes / 60);
+
+        var timeTaken = elapsedHours + "hours " + (elapsedMinutes % 60) + "minutes " + (elapsedSeconds % 60) + "seconds";
+
+        document.write("Time taken: " + timeTaken);
+
+        $('#timeTaken').text("Time taken: " + timeTaken);
+
+        // Now you can submit the form
+        this.submit();
+      });
+
+
+    });
+  </script>
+
 
 </body>
 

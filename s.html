@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <title>Jquery Validation</title>
+  <style>
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="form">
+    <fieldset style="display: center;">
+      <legend>Registration Form</legend>
+      <form id="myform">
+        <!-- Your form fields here -->
+
+        <!-- Submit Button -->
+        <button type="submit">Submit</button>
+      </form>
+    </fieldset>
+  </div>
+
+  <script>
+    $(document).ready(function () {
+      var startTime;
+
+      $('#myform').submit(function (event) {
+        event.preventDefault(); // Prevent the form from submitting
+
+        var endTime = new Date(); // Get the current time when the submit button is clicked
+        var elapsedMilliseconds = endTime - startTime;
+        var elapsedSeconds = Math.floor(elapsedMilliseconds / 1000);
+        var elapsedMinutes = Math.floor(elapsedSeconds / 60);
+        var elapsedHours = Math.floor(elapsedMinutes / 60);
+
+        var timeTaken = elapsedHours + "h " + (elapsedMinutes % 60) + "m " + (elapsedSeconds % 60) + "s";
+
+        document.write("Time taken: " + timeTaken);
+        // You can display the time taken to the user in a specific element on the page
+        // For example, if you have a <div id="timeTaken"></div> element, you can use:
+        // $('#timeTaken').text("Time taken: " + timeTaken);
+
+        // Now you can submit the form
+        this.submit();
+      });
+
+      startTime = new Date(); // Capture the start time when the form is loaded
+    });
+  </script>
+</body>
+
+</html>
